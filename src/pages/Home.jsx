@@ -14,7 +14,7 @@ import lopic from "../assets/network-mesh-wire-digital-technology-background_101
 import "@fontsource/poiret-one";
 import "@fontsource/dosis";
 
-import Resum from '../assets/Resum.jpg'
+import Resum from '../assets/ResumePreview.png'
 const Home = () => {
   const navigate = useNavigate();
   return (

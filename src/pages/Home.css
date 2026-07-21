@@ -1,0 +1,17 @@
+.card-border {
+  width: 20%;
+  min-width: 350px;
+  min-height: 300px;
+
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22) !important;
+  background-color: #fefdfe !important;
+  border-top: 6px solid #3498db !important;
+  border-radius: 25px !important;
+  font-family: "Dosis", sans-serif !important;
+
+  .titleC {
+    font-family: "Poiret One", cursive !important;
+    font-weight: 700;
+    color: #0f9ee7;
+  }
+}

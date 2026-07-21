@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="logoGradientCS" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2fa79a" />
+      <stop offset="100%" stop-color="#5be28a" />
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="50" fill="url(#logoGradientCS)" />
+  <text
+    x="50"
+    y="53"
+    text-anchor="middle"
+    dominant-baseline="central"
+    font-family="Verdana, Arial, Helvetica, sans-serif"
+    font-weight="700"
+    font-size="38"
+    letter-spacing="-2"
+    fill="#ffffff"
+  >CS</text>
+</svg>

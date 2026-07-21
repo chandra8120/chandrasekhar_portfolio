@@ -1,0 +1,6 @@
+.sectionContainer {
+  position: relative;
+  flex-grow: 1;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}

@@ -1,0 +1,67 @@
+.child1-large {
+  width: 99.8%;
+  height: 100%;
+  flex: 5;
+  display: flex;
+  flex-wrap: wrap;
+  border: 4;
+}
+
+.child2-large {
+  width: 100%;
+  height: 100%;
+  flex: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.child2-large .contact-form {
+  height: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.child2-large .loading-button {
+  width: 80%;
+  background: linear-gradient(to right, #3498db, #2c3e50);
+  color: white;
+}
+
+.child2-large .disable-button {
+  width: 80%;
+  color: rgba(0, 0, 0, 0.26);
+  background-color: rgba(0, 0, 0, 0.12);
+  pointer-events: auto;
+  cursor: not-allowed;
+}
+.greet-modal-main {
+  min-width: 250px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  position: fixed;
+  z-index: 1200;
+  margin-top: 12px;
+  transition: all .2s;
+}
+.greet-modal-sub {
+  min-width:260px;
+  width: 16%;
+  height: 13%;
+  border: 4px solid #3498db;
+  border-radius: 15px;
+  position: fixed;
+  margin-right: 5px;
+  z-index: 1200;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <title>Chandrasekhar CS monogram</title>
+  <rect x="2" y="2" width="96" height="96" rx="24" fill="#142B42"/>
+  <rect x="3" y="3" width="94" height="94" rx="23" stroke="#FFFFFF" stroke-opacity=".16" stroke-width="2"/>
+  <path d="M44 30H33C25 30 20 36 20 44V58C20 66 25 72 33 72H44" stroke="#F5FAFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M81 30H66C59 30 55 34 55 41S60 51 67 51H70C77 51 82 55 82 62S77 72 70 72H55" stroke="#72DDF5" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="82" cy="17" r="3" fill="#72DDF5"/>
+</svg>

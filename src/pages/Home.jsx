@@ -1,267 +1,91 @@
-import React from "react";
-import {Avatar,Box,Button,Card,CardContent,CardHeader,Typography,} from "@mui/material";
+﻿import React from "react";
+import { Link } from "react-router-dom";
+import CodeIcon from "@mui/icons-material/Code";
+import StorageIcon from "@mui/icons-material/Storage";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import PhonelinkIcon from "@mui/icons-material/Phonelink";
-import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
-import DesignServicesIcon from "@mui/icons-material/DesignServices";
-import StarsIcon from "@mui/icons-material/Stars";
-import developer from "../assets/developer.svg";
-import Profile from "../assets/Profile.jpg";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import DownloadIcon from "@mui/icons-material/Download";
+import DescriptionIcon from "@mui/icons-material/Description";
 import Layout from "../hoc/LandingPage_Layout";
-import { useNavigate } from "react-router-dom";
+import Profile from "../assets/Profile.jpg";
+import ResumePreview from "../assets/ResumePreview.png";
 import "./Home.css";
-import lopic from "../assets/network-mesh-wire-digital-technology-background_1017-27428.avif";
-import "@fontsource/poiret-one";
-import "@fontsource/dosis";
 
-import Resum from '../assets/ResumePreview.png'
-const Home = () => {
-  const navigate = useNavigate();
-  return (
-    <Layout>
-      <Box
-        sx={{
-          height: "96%",
-          width: "100%",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          flex: 10,
-          overflowX: "auto",
-          overflowY: "auto",
-          marginTop: "10px",
-          paddingBottom: 4,
-          backgroundColor: "#F0F8FF",
-          gap: 2,
-        }}
-      >
-        <Box
-          className="child1"
-          sx={{
-            minWidth: 400,
-            width: "40%",
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            alignItems: "flex-start",
-          }}
-        >
-          <Box
-            sx={{
-              height: "100%",
-              flex: 2.6,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 4,
-            }}
-          >
-            <Typography
-              variant="h3"
-              sx={{ width: "50%", fontFamily: "Poiret one",fontWeight:700 }}
-            >
-              Hey !, I'm Chandra Sekhar,
-            </Typography>
-            <Typography
-              variant="h3"
-              sx={{ width: "50%", fontFamily: "Poiret one",fontWeight:700 }}
-            >
-               MERN Stack Developer.
-            </Typography>
+const services = [
+  {
+    number: "01", icon: CodeIcon, title: "Interfaces built for people.",
+    description: "Responsive web applications with thoughtful interfaces and a reliable foundation for your next idea.",
+    technologies: ["React.js", "Next.js", "TypeScript"], className: "interface-card",
+  },
+  {
+    number: "02", icon: StorageIcon, title: "The engine behind the experience.",
+    description: "RESTful APIs, JWT authentication, and payment integrations with Stripe and Razorpay webhooks.",
+    technologies: ["Node.js", "Express.js", "NestJS"], className: "backend-card",
+  },
+  {
+    number: "03", icon: DashboardIcon, title: "From data to production.",
+    description: "Useful dashboards, MongoDB aggregation, Redis caching, and dependable deployments on AWS and VPS servers.",
+    technologies: ["MongoDB", "MySQL", "Redis", "AWS"], className: "data-card",
+  },
+];
 
-            <Typography
-              sx={{ width: "50%", fontFamily: "Poiret one", fontWeight: 600 }}
-            >
-              I'm a young web developer with around one year of experience, but
-              a huge motivation to create something user friendly and beautiful.
-            </Typography>
+const Home = () => (
+  <Layout>
+    <main className="developer-home">
+      <section className="home-intro" aria-labelledby="home-heading">
+        <div className="intro-copy">
+          <span className="home-eyebrow">DEVELOPER / PROBLEM SOLVER</span>
+          <h1 id="home-heading">Hey !, I'm Chandra Sekhar,</h1>
+          <p className="intro-headline">Ideas into interfaces.<br /><span>Code into experiences.</span></p>
+          <p className="intro-description">MERN Stack Developer with 3+ years of hands-on experience building and deploying web applications. From React and Next.js to Node.js and NestJS, I connect the details that make a product work.</p>
+          <div className="intro-actions">
+            <Link className="home-button primary-button" to="/contact">Let's work together <ArrowForwardIcon fontSize="small" /></Link>
+            <Link className="home-text-link" to="/work">Explore my work <ArrowForwardIcon fontSize="small" /></Link>
+          </div>
+        </div>
+        <div className="developer-profile">
+          <div className="profile-image-frame"><img src={Profile} alt="Chandra Sekhar" width="360" height="360" /></div>
+          <div className="profile-caption"><span className="profile-dot" /> MERN Stack Developer <span className="profile-location">Based in India</span></div>
+          <div className="experience-note"><strong>3+</strong><span>years of building<br />for the web</span></div>
+        </div>
+      </section>
 
-            <Box
-              sx={{
-                width: "21%",
-                borderRight: 8,
-                borderRadius: 25,
-                borderColor: "#3498db",
-              }}
-            >
-              <Button
-                variant="contained"
-                sx={{
-                  width: "170px",
-                  borderRadius: 15,
-                  background: "linear-gradient(to right, #2c3e50, #3498db)",
-                }}
-                onClick={() => {
-                  navigate("/contact");
-                }}
-              >
-                Contact me
-              </Button>
-            </Box>
-            <Typography component="p">
-              <StarsIcon color="primary" fontSize={"10"} /> MERN Stack Developer
-            </Typography>
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            minWidth: 400,
-            width: "40%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            overflowY: "hidden",
-            backgroundImage: `url(${lopic})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-          }}
-        >
-          <Avatar src={Profile} sx={{ width: 450, height: 450 }} />
-        </Box>
-
-        <Box
-          sx={{
-            minWidth: 420,
-            width: "85%",
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 10,
-            background: "#F0F8FF",
-            gap: 2,
-            padding: 2,
-          }}
-        >
-          <Card
-            sx={{
-              width: "20%",
-              minWidth: 350,
-              minHeight: 200,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow:
-                "0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22)",
-              borderTopRightRadius: 100,
-              borderBottomRightRadius: 100,
-              backgroundColor: "#fefdfe",
-            }}
-          >
-            <CardHeader
-              sx={{ display: "flex" }}
-              avatar={
-                <Avatar sx={{ bgcolor: "white" }}>
-                  <DesignServicesIcon color="primary" fontSize="large" />
-                </Avatar>
-              }
-              title={
-                <Typography
-                  variant="h4"
-                  sx={{ fontFamily: "Dosis, sans-serif" }}
-                >
-                  My Services
-                </Typography>
-              }
-            />
-          </Card>
-          <Card className="card-border">
-            <CardHeader
-              sx={{
-                height: 40,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-              avatar={
-                <Avatar sx={{ bgcolor: "white" }}>
-                  <PhonelinkIcon color="success" fontSize="medium" />
-                </Avatar>
-              }
-              title={
-                <Typography className="titleC" variant="h6" color="primary">
-                  {/* Responsive web design */}
-                  Chandra Sekhar Resume
-                </Typography>
-              }
-            />
-
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-               
-                <img onClick={()=>{navigate("/resume")}} style={{cursor:"pointer"}} src={Resum} alt="resume" width="320px" height='400px' />
-                
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card className="card-border">
-            <CardHeader
-              sx={{
-                height: 40,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-              avatar={
-                <Avatar sx={{ bgcolor: "white" }}>
-                  <AppRegistrationIcon color="secondary" fontSize="medium" />
-                </Avatar>
-              }
-              title={
-                <Typography className="titleC" variant="h6" color="primary">
-                  Mobile app development{" "}
-                </Typography>
-              }
-            />
-
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                Through my expertise and passion for app development, I have
-                successfully crafted innovative and user-centric mobile
-                applications that have transformed businesses and delighted
-                users. With a meticulous approach to design, seamless
-                functionality and a deep understanding of the latest technology
-                trends.
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card className="card-border">
-            <CardHeader
-              sx={{
-                height: 40,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-              avatar={
-                <Avatar sx={{ bgcolor: "white" }}>
-                  <DashboardIcon color="error" fontSize="medium" />
-                </Avatar>
-              }
-              title={
-                <Typography className="titleC" variant="h6" color="primary">
-                  Dashboard Design
-                </Typography>
-              }
-            />
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                Catering to the specific requirements of a dashboard design is
-                one of my specialties in app development. Understanding the
-                Importance of data visualization and intuitive user interfaces,
-                I create responsive dashboards that provide a seamless
-                experience across different devices.
-              </Typography>
-            </CardContent>
-          </Card>
-
-          
-        </Box>
-      </Box>
-    </Layout>
-  );
-};
+      <section className="home-capabilities" aria-labelledby="capabilities-heading">
+        <div className="capabilities-heading">
+          <div><span className="home-eyebrow">WHAT I BRING TO THE TABLE</span><h2 id="capabilities-heading">Built across the stack.</h2></div>
+          <p>Frontend finesse. Backend thinking.<br />One connected experience.</p>
+        </div>
+        <div className="developer-card-grid">
+          {services.map(({ number, icon: Icon, title, description, technologies, className }) => (
+            <article className={`developer-service-card ${className}`} key={number}>
+              <div className="service-card-top"><span className="service-icon"><Icon /></span><span className="service-number">/{number}</span></div>
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <ul className="technology-tags" aria-label={`${title} technologies`}>{technologies.map(technology => <li key={technology}>{technology}</li>)}</ul>
+            </article>
+          ))}
+          <article className="developer-resume-card">
+            <div className="resume-card-heading"><span className="resume-icon"><DescriptionIcon /></span><span>THE PERSON BEHIND THE CODE</span></div>
+            <div className="resume-card-content">
+              <Link className="resume-preview-link" to="/resume" aria-label="View resume">
+                <img src={ResumePreview} alt="First page of Chandra Sekhar's updated MERN Stack Developer resume" width="894" height="1264" loading="lazy" />
+                <span>View resume <ArrowForwardIcon fontSize="small" /></span>
+              </Link>
+              <div className="resume-card-summary">
+                <h3>My developer journey.</h3>
+                <p>Chandra Sekhar Resume<br /><span>MERN Stack Developer / 3+ years</span></p>
+                <a className="home-button resume-download" href="/Resume.pdf" download="Chandra_Sekhar_Mern_Stack_Resume.pdf"><DownloadIcon fontSize="small" /> Download resume</a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div className="home-toolkit">
+          <span className="home-eyebrow">MY EVERYDAY TOOLKIT</span>
+          <ul className="technology-tags" aria-label="Developer toolkit">{["React", "Next.js", "Node.js", "NestJS", "MongoDB", "TypeScript", "Git", "AWS"].map(technology => <li key={technology}>{technology}</li>)}</ul>
+        </div>
+      </section>
+    </main>
+  </Layout>
+);
 
 export default Home;

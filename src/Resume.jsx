@@ -7,11 +7,11 @@ import Layout from './hoc/LandingPage_Layout';
 const Resume = () => {
   return (
     <Layout>
-      <Box sx={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", overflowY: "auto", padding: 2 }}>
-        <Card className="card-border" sx={{ width: "80%", minWidth: 350 }}>
+      <Box sx={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", overflowY: "auto", padding: 2, boxSizing: "border-box", minWidth: 0 }}>
+        <Card className="card-border" sx={{ width: { xs: "100%", md: "80%" }, minWidth: 0 }}>
           <CardHeader
             sx={{
-              height: 40,
+              height: "auto",
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
@@ -29,7 +29,7 @@ const Resume = () => {
             action={
               <Button
                 href="/Resume.pdf"
-                download="Chandra_Sekhar_Resume.pdf"
+                download="Chandra_Sekhar_Mern_Stack_Resume.pdf"
                 startIcon={<DownloadIcon />}
                 variant="contained"
                 sx={{ marginTop: 1, background: "linear-gradient(to right, #2c3e50, #3498db)" }}

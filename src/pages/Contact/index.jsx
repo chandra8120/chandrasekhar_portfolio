@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import Layout from "../../hoc/LandingPage_Layout";
 import {
   Box,
@@ -8,15 +8,15 @@ import {
 } from "@mui/material";
 import { Close, Send } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import emailjs from "@emailjs/browser";
 import "./ContactPage.css";
 
 const TextInput = ({ label, name, value, handler }) => {
   return (
-    <Box sx={{ width: "38.5%", minWidth: 250 }}>
+    <Box sx={{ width: { xs: "100%", sm: "38.5%" }, minWidth: 0 }}>
       <TextField
         label={label}
         name={name}
+        type={name === "email" ? "email" : name === "mobNo" ? "tel" : "text"}
         value={value}
         fullWidth
         onChange={handler}
@@ -37,8 +37,9 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [greetModal, setGreetModal] = useState(false);
   const [sendError, setSendError] = useState("");
-  const [disable, setDisable] = useState(true);
-  const [isEmailValid, setIsEmailValid] = useState(false);
+  const sending = useRef(false);
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactInfo.email.trim());
+  const disable = contactInfo.name.trim().length < 2 || !isEmailValid || contactInfo.message.trim().length <= 10;
 
 
   const Header = ({ title, subtitle }) => {
@@ -58,10 +59,6 @@ const Contact = () => {
       ...contactInfo,
       [name]: value,
     });
-
-    if (name === "email") {
-      setIsEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
-    }
   };
   const closeHandler = () => {
     setGreetModal(false);
@@ -71,12 +68,12 @@ const Contact = () => {
     return (
       <Box className="greet-modal-main">
         <Box className="greet-modal-sub">
-          <Button sx={{ marginLeft: "86%" }} onClick={closeHandler}>
+          <Button aria-label="Close success message" sx={{ marginLeft: "86%" }} onClick={closeHandler}>
             <Close />
           </Button>
             <Typography component="p">Thanks for reaching out!</Typography>
             <Typography component="p">
-            Your Message just showed up in my inbox. Talk to you soon!
+            Your message has been submitted. Thank you for getting in touch!
           </Typography>
           <Button
             onClick={() => {
@@ -90,51 +87,36 @@ const Contact = () => {
     );
   };
 
-  const handleMail = () => {
-    if (
-      contactInfo.name.length >= 2 &&
-      isEmailValid &&
-      contactInfo.message.length > 10
-    ) {
-      setDisable(false);
-    } else {
-      setDisable(true);
-    }
-  };
-  useEffect(() => {
-    handleMail();
-  }, [contactInfo, isEmailValid]);
-
   const sendMail = async () => {
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-    if (!serviceId || !templateId || !publicKey) {
-      setSendError("Contact form is not configured yet. Please email me directly.");
-      return;
-    }
-
+    if (disable || sending.current) return;
+    sending.current = true;
     setLoading(true);
     setSendError("");
     try {
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          user_name: contactInfo.name,
-          user_email: contactInfo.email,
-          company: contactInfo.company,
-          mobNo: contactInfo.mobNo,
-          message: contactInfo.message,
-        },
-        { publicKey }
-      );
+      const response = await fetch("https://formsubmit.co/ajax/chandrasekhar8120@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: contactInfo.name.trim(),
+          email: contactInfo.email.trim(),
+          company: contactInfo.company.trim(),
+          phone: contactInfo.mobNo.trim(),
+          message: contactInfo.message.trim(),
+          _subject: "New portfolio contact inquiry",
+          _template: "table",
+        }),
+      });
+      if (!response.ok) throw new Error("Submission request failed");
+      const result = await response.json();
+      if (result.success !== true && result.success !== "true") {
+        throw new Error("Submission was not accepted");
+      }
       setContactInfo({ name: "", company: "", email: "", mobNo: "", message: "" });
       setGreetModal(true);
     } catch {
       setSendError("Unable to send your message. Please try again or email me directly.");
     } finally {
+      sending.current = false;
       setLoading(false);
     }
   };
@@ -156,7 +138,7 @@ const Contact = () => {
           <Box
             sx={{
               width: "100%",
-              minWidth: 450,
+              minWidth: 0,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -195,10 +177,10 @@ const Contact = () => {
           </Box>
         </Box>
         <Box className="child2-large">
-          <Box className="contact-form">
+          <Box component="form" className="contact-form" onSubmit={(event) => { event.preventDefault(); sendMail(); }}>
             <Typography
               variant="h3"
-              sx={{ width: "80%", textAlign: "center", color: "#3498db",marginTop:"66%" }}
+              sx={{ width: "80%", textAlign: "center", color: "#3498db",marginTop: 3 }}
             >
               Contact Us
             </Typography>
@@ -237,7 +219,7 @@ const Contact = () => {
               rows={4}
               
               value={contactInfo.message}
-              sx={{ width: "80%", minWidth: 250 }}
+              sx={{ width: { xs: "100%", sm: "80%" }, minWidth: 0 }}
               onChange={(e) => {
                 setContactInfo({ ...contactInfo, message: e.target.value });
               }}
@@ -246,13 +228,13 @@ const Contact = () => {
               variant="contained"
               className={disable ? "disable-button" : "loading-button"}
               startIcon={<Send />}
-              disabled={disable}
-              loading={loading}
-              onClick={sendMail}
+              disabled={disable || loading}
+              aria-busy={loading}
+              type="submit"
             >
-              Send Away
+              {loading ? "Sending..." : "Send Away"}
             </Button><br/>
-            {sendError && <Typography color="error">{sendError}</Typography>}
+            {sendError && <Typography role="alert" color="error">{sendError} <a href="mailto:chandrasekhar8120@gmail.com">Email Chandra Sekhar</a></Typography>}
             {/* <LoadingButton variant="contained" sx={{width:"80%"}} onClick={sendMail} >Send Away</LoadingButton> */}
           </Box>
         </Box>

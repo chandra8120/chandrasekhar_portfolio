@@ -4,7 +4,7 @@
   flex: 5;
   display: flex;
   flex-wrap: wrap;
-  border: 4;
+  min-width: 0;
 }
 
 .child2-large {
@@ -17,7 +17,10 @@
 }
 
 .child2-large .contact-form {
-  height: 70%;
+  width: 100%;
+  min-width: 0;
+  padding: 24px 16px;
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -52,7 +55,8 @@
 .greet-modal-sub {
   min-width:260px;
   width: 16%;
-  height: 13%;
+  max-width: calc(100vw - 24px);
+  box-sizing: border-box;
   border: 4px solid #3498db;
   border-radius: 15px;
   position: fixed;
@@ -64,4 +68,13 @@
   align-items: center;
   justify-content: center;
   padding: 5px;
+}
+
+@media (max-width: 599px) {
+  .child1-large, .child2-large {
+    flex: 1 1 100%;
+    height: auto;
+    min-width: 0;
+  }
+  .child1-large { gap: 24px; }
 }

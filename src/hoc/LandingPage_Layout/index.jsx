@@ -1,6 +1,5 @@
 import {
   AppBar,
-  Avatar,
   Box,
   Button,
   IconButton,
@@ -23,23 +22,27 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const navigateTo = (path) => {
+    setAnchorEl(null);
+    navigate(path);
+  };
   return (
     <Box
       sx={{
-        minWidth: 350,
+        minWidth: 0,
         width: "100%",
         height: "100%",
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <Box sx={{ minHeight: 55 }}>
-        <AppBar component="nav">
+      <Box>
+        <AppBar component="nav" position="static">
           <Toolbar
             sx={{ background: "linear-gradient(to right, #2c3e50, #3498db)" }}
           >
-            <IconButton edge="start" onClick={() => navigate("/")}>
-              <Avatar src={MyLogo} sx={{ width: 56, height: 56 }} />
+            <IconButton aria-label="Go to home" edge="start" onClick={() => navigateTo("/")}>
+              <Box component="img" src={MyLogo} alt="Chandrasekhar CS logo" width={48} height={48} sx={{ display: "block", borderRadius: "12px" }} />
             </IconButton>
             <Box
               sx={{
@@ -51,17 +54,21 @@ const Layout = ({ children }) => {
             >
               {!isSmallScreen ? (
                 <>
-                  <Button color="inherit" onClick={() => navigate("/")}>Home</Button>
-                  <Button color="inherit" onClick={() => navigate("/work")}>Work</Button>
-                  <Button color="inherit" onClick={() => navigate("/about")}>About</Button>
-                  <Button color="inherit" onClick={() => navigate("/contact")}>Contact</Button>
-                  <Button color="inherit" onClick={() => navigate("/resume")}>Resume</Button>
+                  <Button color="inherit" onClick={() => navigateTo("/")}>Home</Button>
+                  <Button color="inherit" onClick={() => navigateTo("/work")}>Work</Button>
+                  <Button color="inherit" onClick={() => navigateTo("/about")}>About</Button>
+                  <Button color="inherit" onClick={() => navigateTo("/contact")}>Contact</Button>
+                  <Button color="inherit" onClick={() => navigateTo("/resume")}>Resume</Button>
                 </>
               ) : (
                 <>
                   <IconButton
                     color="inherit"
-                    aria-controls="basic-menu"
+                    id="navigation-menu-button"
+                    aria-label="Open navigation menu"
+                    aria-haspopup="menu"
+                    aria-expanded={open}
+                    aria-controls={open ? "basic-menu" : undefined}
                     onClick={(event) => {
                       setAnchorEl(event.currentTarget);
                     }}
@@ -70,17 +77,18 @@ const Layout = ({ children }) => {
                   </IconButton>
                   <Menu
                     id="basic-menu"
+                    MenuListProps={{ "aria-labelledby": "navigation-menu-button" }}
                     anchorEl={anchorEl}
                     open={open}
                     onClose={() => {
                       setAnchorEl(null);
                     }}
                   >
-                    <MenuItem onClick={() => navigate("/")}>Home</MenuItem>
-                    <MenuItem onClick={() => navigate("/work")}>Work</MenuItem>
-                    <MenuItem onClick={() => navigate("/about")}>About</MenuItem>
-                    <MenuItem onClick={() => navigate("/contact")}>Contact</MenuItem>
-                    <MenuItem onClick={() => navigate("/resume")}>Resume</MenuItem>
+                    <MenuItem onClick={() => navigateTo("/")}>Home</MenuItem>
+                    <MenuItem onClick={() => navigateTo("/work")}>Work</MenuItem>
+                    <MenuItem onClick={() => navigateTo("/about")}>About</MenuItem>
+                    <MenuItem onClick={() => navigateTo("/contact")}>Contact</MenuItem>
+                    <MenuItem onClick={() => navigateTo("/resume")}>Resume</MenuItem>
                   </Menu>
                 </>
               )}

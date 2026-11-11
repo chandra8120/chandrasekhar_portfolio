@@ -1,4 +1,4 @@
-import React from 'react'
+ 
 import Routing from './routes'
 
 const App = () => {
@@ -11,3 +11,4 @@ const App = () => {
 }
 
 export default App
+ 

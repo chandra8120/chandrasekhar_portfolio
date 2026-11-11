@@ -68,3 +68,18 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Contact form delivery
+
+The Contact Us page posts name, email, company, phone, and message to FormSubmit
+for delivery to **chandrasekhar8120@gmail.com**. It needs no application database
+or EmailJS credentials.
+
+On the first submission from your running site, check that inbox (including spam)
+for FormSubmit's activation email and confirm its activation link. Then submit a
+new test inquiry and verify that all details arrive before relying on delivery.
+FormSubmit processes the submitted contact details; the portfolio does not save
+an inbox in a database or browser storage. The success notice confirms that the
+service accepted the submission, not that inbox delivery was verified.
+
+Documentation: https://formsubmit.co/ and https://formsubmit.co/ajax-documentation
